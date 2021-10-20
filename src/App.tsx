@@ -1,9 +1,22 @@
 import React from "react";
+import * as api from "./api";
 import logo from "./assets/logo.svg";
-import test from "./assets/128.png";
 import "./App.less";
 
-function App() {
+// interface IProps {
+//   className?: string;
+//   style?: React.CSSProperties;
+//   onClick?: Function;
+// }
+
+export default function App() {
+  const handleClick = async () => {
+    const res = await api.commonApi.getDemo();
+    console.log(process.env.NODE_ENV);
+    console.log(res, "res");
+    console.log(process.env.base_url);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -14,10 +27,9 @@ function App() {
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
-        <img src={test} alt="" />
       </header>
+
+      <button onClick={() => handleClick()}>请求</button>
     </div>
   );
 }
-
-export default App;

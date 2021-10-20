@@ -7,16 +7,16 @@ module.exports = merge(baseConfig, {
   devtool: "eval-cheap-module-source-map",
   stats: "errors-only",
   optimization: {
-    runtimeChunk: true,
+    runtimeChunk: true
   },
   devServer: {
     host: "127.0.0.1",
     port: 9000,
     hot: true,
-    open: true,
+    open: true
   },
   cache: {
-    type: "memory",
+    type: "memory"
   },
   module: {
     rules: [
@@ -27,17 +27,17 @@ module.exports = merge(baseConfig, {
           {
             loader: "css-loader",
             options: {
-              importLoaders: 1,
-            },
+              importLoaders: 1
+            }
           },
           "postcss-loader",
           {
             loader: "thread-loader",
             options: {
-              workerParallelJobs: 2,
-            },
-          },
-        ],
+              workerParallelJobs: 2
+            }
+          }
+        ]
       },
       {
         test: /\.less$/,
@@ -48,22 +48,22 @@ module.exports = merge(baseConfig, {
           {
             loader: "thread-loader",
             options: {
-              workerParallelJobs: 2,
-            },
+              workerParallelJobs: 2
+            }
           },
-          "less-loader",
-        ],
-      },
-    ],
+          "less-loader"
+        ]
+      }
+    ]
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin({
       // 成功的时候输出
       compilationSuccessInfo: {
-        messages: [`Your application is running here: http://localhost:9000`],
+        messages: [`Your application is running here: http://localhost:9000`]
       },
       // 是否每次都清空控制台
-      clearConsole: true,
-    }),
-  ],
+      clearConsole: true
+    })
+  ]
 });

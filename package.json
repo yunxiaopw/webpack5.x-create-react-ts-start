@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.pro.conf.js",
-    "dev": "cross-env NODE_ENV=development  webpack-dev-server --config ./webpack/webpack.dev.conf.js",
-    "test": "cross-env NODE_ENV=test  webpack-dev-server --config ./webpack/webpack.dev.conf.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.conf.js",
+    "dev:test": "cross-env NODE_ENV=test webpack-dev-server --config ./webpack/webpack.dev.conf.js",
+    "dev:prod": "cross-env NODE_ENV=production  webpack-dev-server --config ./webpack/webpack.dev.conf.js",
+    "build:dev": "cross-env NODE_ENV=dev webpack --config ./webpack/webpack.pro.conf.js",
+    "build:test": "cross-env NODE_ENV=test webpack --config ./webpack/webpack.pro.conf.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.pro.conf.js",
     "eslint": "eslint ./src --ext .ts"
   },
   "repository": {
@@ -58,6 +61,8 @@
     "@types/react": "^17.0.29",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.3.1",
+    "axios": "^0.23.0",
+    "dotenv": "^10.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "redux": "^4.1.1"
