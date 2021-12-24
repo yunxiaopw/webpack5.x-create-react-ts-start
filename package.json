@@ -10,7 +10,7 @@
     "build:dev": "cross-env NODE_ENV=dev webpack --config ./webpack/webpack.pro.conf.js",
     "build:test": "cross-env NODE_ENV=test webpack --config ./webpack/webpack.pro.conf.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.pro.conf.js",
-    "eslint": "eslint ./src --ext .ts"
+    "eslint": "eslint ./src --ext .ts .tsx .js"
   },
   "repository": {
     "type": "git",
