@@ -4,14 +4,14 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin"); //
 const svgToMiniDataURI = require("mini-svg-data-uri");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const resolvePath = (relativePath) => path.resolve(__dirname, relativePath); // 根据相对路径获取绝对路径
-
 const devMode = process.env.NODE_ENV !== "production";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // css 代码打包分离
 
 const baseConfig = {
   entry: resolvePath("../src/index.tsx"),
   output: {
     path: resolvePath("../dist"),
-    filename: devMode ? "js/[name].bundle.js" : "js/[name].[fullhash].bundle.js",
+    filename: devMode ? "js/[name].bundle.js" : "js/[name].[contenthash].bundle.js",
     assetModuleFilename: "images/[hash][ext][query]"
   },
   cache: {
@@ -31,12 +31,12 @@ const baseConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts)$/,
         use: "babel-loader",
         exclude: /node_modules/
       },
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         use: {
           loader: "ts-loader",
           options: {
@@ -44,6 +44,10 @@ const baseConfig = {
           }
         },
         exclude: /node_modules/
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -75,6 +79,10 @@ const baseConfig = {
     new ForkTsCheckerWebpackPlugin(),
     new ESLintPlugin({
       extensions: [".js", ".jsx", ".ts", ".tsx"]
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? "css/[name].css" : "css/[name]-[contenthash].css",
+      chunkFilename: devMode ? "css/[id].css" : "css/[id].[contenthash].css"
     })
   ]
 };

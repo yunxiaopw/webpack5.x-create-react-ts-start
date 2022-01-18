@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const { baseConfig, resolvePath } = require("./webpack.base.conf");
+const { baseConfig } = require("./webpack.base.conf");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin"); // 错误提示
 
 module.exports = merge(baseConfig, {
@@ -17,44 +17,6 @@ module.exports = merge(baseConfig, {
   },
   cache: {
     type: "memory"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1
-            }
-          },
-          "postcss-loader",
-          {
-            loader: "thread-loader",
-            options: {
-              workerParallelJobs: 2
-            }
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "postcss-loader",
-          {
-            loader: "thread-loader",
-            options: {
-              workerParallelJobs: 2
-            }
-          },
-          "less-loader"
-        ]
-      }
-    ]
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin({
